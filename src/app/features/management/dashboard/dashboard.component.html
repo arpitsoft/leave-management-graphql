@@ -1,0 +1,25 @@
+<div class="dashboard-container container py-4">
+
+  <div *ngIf="currentUser.role === 'HOD'" class="hod-dashboard mb-4">
+    <h2 class="mb-4">HOD Dashboard</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col" *ngFor="let card of [{title:'Total Staff', value:staffCount}]">
+        <app-card [title]="card.title" [value]="card.value"></app-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentUser.role === 'STAFF'" class="staff-dashboard">
+    <h2 class="mb-4">Staff Dashboard</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col" *ngFor="let card of [
+        {title:'Total Leaves', value:totalLeaves},
+        {title:'Approved Leaves', value:approvedLeaves},
+        {title:'Rejected Leaves', value:rejectedLeaves}
+      ]">
+        <app-card [title]="card.title" [value]="card.value"></app-card>
+      </div>
+    </div>
+  </div>
+
+</div>

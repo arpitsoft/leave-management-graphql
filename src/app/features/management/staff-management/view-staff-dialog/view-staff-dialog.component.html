@@ -1,0 +1,17 @@
+<h2 mat-dialog-title class="dialog-title text-center">Staff Details</h2>
+<div class="view-container card shadow-lg p-4">
+    <div class="avatar-container mx-auto mb-4">
+        <img [src]="staff?.profile_image ? staff?.profile_image : 'assets/img/profile-image.png'" class="profile-pic" />
+    </div>
+    <div class="staff-info mb-4">
+        <p class="d-flex justify-content-between mb-2"><strong>Name:</strong> <span>{{ staff?.name }}</span></p>
+        <p class="d-flex justify-content-between mb-2"><strong>Username:</strong> <span>{{ staff?.username }}</span></p>
+        <p class="d-flex justify-content-between mb-2"><strong>Email:</strong> <span>{{ staff?.email }}</span></p>
+        <p class="d-flex justify-content-between mb-2"><strong>Contact:</strong> <span>{{ staff?.contact }}</span></p>
+        <p class="d-flex justify-content-between mb-2"><strong>Department:</strong> <span>{{ staff?.department }}</span>
+        </p>
+    </div>
+    <button (click)="close()" mat-raised-button color="primary" mat-dialog-close class="w-100">
+        Close
+    </button>
+</div>

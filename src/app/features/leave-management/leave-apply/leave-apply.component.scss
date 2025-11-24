@@ -1,0 +1,10 @@
+.popup-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+@media (max-width: 600px) {
+  .popup-container {
+    max-width: 90vw;
+  }
+}

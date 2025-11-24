@@ -1,0 +1,11 @@
+<nav class="sidebar">
+    <div class="menus">
+        <ul>
+            <ng-template *ngFor="let menu of menus" [ngIf]="menu.role.includes(userRole())">
+                <li>
+                    <a [routerLink]="menu.route"> {{menu.lable}} </a>
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+</nav>

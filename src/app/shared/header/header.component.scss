@@ -1,0 +1,35 @@
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  margin: 0px 7px;
+  background: #2c3e50;
+  color: #ffffff;
+margin: 0px 7px;
+  
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: none;
+    color: white;
+  }
+
+  .profile-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    margin: 0px 7px;
+  }
+
+  .user-name {
+    font-weight: 500;
+    color: white;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}

@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+/* SUCCESS TOAST */
+.mat-mdc-snack-bar-container.toast-success {
+  --mdc-snackbar-container-color: #28a745 !important;
+  --mdc-snackbar-supporting-text-color: #fff !important;
+  --mdc-snackbar-action-color: #fff !important;
+}
+
+/* ERROR TOAST */
+.mat-mdc-snack-bar-container.toast-error {
+  --mdc-snackbar-container-color: #dc3545 !important;
+  --mdc-snackbar-supporting-text-color: #fff !important;
+  --mdc-snackbar-action-color: #fff !important;
+}
+
+/* WARNING TOAST */
+.mat-mdc-snack-bar-container.toast-warning {
+  --mdc-snackbar-container-color: #ffca28 !important;
+  --mdc-snackbar-supporting-text-color: #000 !important;
+  --mdc-snackbar-action-color: #000 !important;
+}

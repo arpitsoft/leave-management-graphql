@@ -1,0 +1,31 @@
+<h4 mat-dialog-title class="fw-bold text-primary border-bottom pb-2">
+  Leave Details
+</h4>
+
+<div mat-dialog-content class="py-3">
+
+  <!-- Leave Info -->
+  <div class="mb-3">
+    <p class="mb-1 justify-content-between d-flex"><strong>From:</strong> <span class="text-muted">{{ data.fromDate | date:'dd-MM-YYYY' }}</span></p>
+    <p class="mb-1 justify-content-between d-flex"><strong>To:</strong> <span class="text-muted">{{ data.toDate | date:'dd-MM-YYYY' }}</span></p>
+    <p class="mb-1 justify-content-between d-flex"><strong>Reason:</strong> <span class="text-muted">{{ data.reason }}</span></p>
+    <p class="mb-1 justify-content-between d-flex"><strong>Status:</strong>
+      <span class="badge py-1 px-2"
+            [ngClass]="{
+              'bg-success': data.status === 'Approved',
+              'bg-danger': data.status === 'Rejected',
+              'bg-warning text-dark': data.status === 'Pending'
+            }">
+        {{ data.status }}
+      </span>
+    </p>
+    <p class="mb-1"><strong>Comment:</strong> <span class="text-muted">{{ data.comment || '-' }}</span></p>
+  </div>
+
+</div>
+
+<div mat-dialog-actions class="d-flex justify-content-end pt-2 border-top">
+  <button mat-stroked-button color="primary" (click)="onClose()">
+    <i class="bi bi-x-circle me-1"></i> Close
+  </button>
+</div>

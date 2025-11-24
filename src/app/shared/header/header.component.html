@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <span class="logo">EduPortal</span>
+
+  <span class="spacer"></span>
+
+  <!-- USER DROPDOWN -->
+  <ng-container *ngIf="currentUser(); else guest">
+    <button mat-button [matMenuTriggerFor]="userMenu" class="profile-btn">
+      <img [src]="getProfileImage()" alt="Profile" class="profile-img">
+      <span class="user-name">{{ currentUser()?.name }}</span>
+    </button>
+
+    <!-- DROPDOWN MENU -->
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item disabled>
+        <mat-icon>person</mat-icon>
+        {{ currentUser()?.username }}
+      </button>
+
+      <button mat-menu-item disabled>
+        <mat-icon>email</mat-icon>
+        {{ currentUser()?.email }}
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  </ng-container>
+
+  <!-- WHEN USER IS NOT LOGGED IN -->
+  <ng-template #guest>
+    <button mat-button routerLink="/login">Login</button>
+  </ng-template>
+</mat-toolbar>

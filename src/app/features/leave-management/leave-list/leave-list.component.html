@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">My Leaves</h2>
+        <button class="btn btn-success btn-lg shadow-sm" (click)="applyLeave()">
+            <i class="bi bi-plus-circle"></i> Apply Leave
+        </button>
+    </div>
+    <div class="mb-4">
+        <input class="form-control form-control-lg shadow-sm" placeholder="Search Leaves by Reason, Status, or Date"
+            (input)="applyFilter($event)">
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let leave of dataSource.filteredData">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title fw-bold">{{ leave.staffName }}</h5>
+                        <p class="card-text justify-content-between d-flex  mb-1"><strong>From:</strong> {{ leave.fromDate | date:'dd-MM-YYYY' }}</p>
+                        <p class="card-text justify-content-between d-flex  mb-1"><strong>To:</strong> {{ leave.toDate | date:'dd-MM-YYYY' }}</p>
+                        <p class="card-text justify-content-between d-flex  mb-1"><strong>Reason:</strong> {{ leave.reason }}</p>
+                        <p class="card-text justify-content-between d-flex  mb-1"><strong>Days:</strong> {{ leave.fromDate | calculateDate : leave.toDate }}</p>
+
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="badge py-2 px-3" [ngClass]="{
+                'bg-success': leave.status === 'Approved',
+                'bg-danger': leave.status === 'Rejected',
+                'bg-warning text-dark': leave.status === 'Pending'
+              }">
+                            {{ leave.status }}
+                        </span>
+                        <button class="btn btn-outline-primary btn-sm" (click)="viewLeave(leave)">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="dataSource.filteredData.length === 0" class="text-center mt-5 text-muted">
+        <i class="bi bi-folder-x fs-1 mb-3"></i>
+        <p>No leaves found.</p>
+    </div>
+</div>

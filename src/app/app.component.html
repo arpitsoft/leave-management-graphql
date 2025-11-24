@@ -1,0 +1,13 @@
+<div *ngIf="authService.isLoggedIn(); else authPages" class="app-layout">
+  <app-sidebar></app-sidebar>
+  <div class="main-containt w-100">
+    <app-header></app-header>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<ng-template #authPages>
+  <router-outlet></router-outlet>
+</ng-template>
