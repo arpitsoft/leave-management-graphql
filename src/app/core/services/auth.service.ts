@@ -17,8 +17,8 @@ export class AuthService {
     }
   }
 
-  getToken(){
-    return 'to be implemented'
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   get userRole() {

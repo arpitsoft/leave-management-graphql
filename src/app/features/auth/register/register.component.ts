@@ -12,6 +12,7 @@ import { User } from '../../../shared/models/user.model';
 import { UserValidators } from '../../../core/validators/user-validators';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastService } from '../../../core/services/toast.service';
+import bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-register',
@@ -111,6 +112,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
+      const hashedPassword = bcrypt.hashSync(this.registerForm.value.password, 10);
       this.loading.set(true)
       const registerForm: User = {
         name: this.registerForm.value.name,
@@ -118,9 +120,9 @@ export class RegisterComponent implements OnInit {
         email: this.registerForm.value.email,
         contact: this.registerForm.value.contact,
         department: this.registerForm.value.department,
-        password: this.registerForm.value.password,
+        password: hashedPassword,
         profile_image: this.registerForm.value.profile_image,
-        role: this.registerForm.value.role  
+        role: this.registerForm.value.role
       }
       this.userService.register(registerForm).subscribe(
         {

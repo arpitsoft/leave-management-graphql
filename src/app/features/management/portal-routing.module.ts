@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [hodRoleGuard],
     loadComponent: () => import('./staff-management/staff-management.component').then(m => m.StaffManagementComponent)
   },
+    {
+    path: 'notification',
+    canActivate: [hodRoleGuard],
+    loadComponent: () => import('../notifications/notifications.component').then(m => m.NotificationsComponent)
+  },
 ];
 
 @NgModule({

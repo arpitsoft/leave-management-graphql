@@ -12,6 +12,8 @@ import { User } from '../../../shared/models/user.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LOGIN_MUTATION } from '../../../core/graphql/notification.graphql';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
   private userService = inject(UserService)
   private authService = inject(AuthService)
   private toastService = inject(ToastService)
+  private apollo = inject(Apollo)
 
 
   private fb = inject(FormBuilder)
@@ -68,26 +71,53 @@ export class LoginComponent implements OnInit {
     })
   }
 
+
+
+  // login() {
+  //   if (this.loginForm.invalid) return;
+
+  //   this.loading.set(true);
+  //   const { username, password } = this.loginForm.value;
+
+  //   this.userService.getUsers().subscribe(users => {
+  //     const user = users.find(u => u.username === username && u.password === password);
+
+  //     if (user) {
+  //       this.authService.login(user);
+  //       this.toastService.success('Logged In');
+  //       this.router.navigate(['/portal/dashboard']);
+  //     } else {
+  //       this.errorMessage = 'Invalid username or password';
+  //     }
+  //     this.loading.set(false);
+  //   }, err => {
+  //     this.errorMessage = 'Server error';
+  //     this.loading.set(false);
+  //   });
+  // }
+
+
   login() {
     if (this.loginForm.invalid) return;
 
     this.loading.set(true);
     const { username, password } = this.loginForm.value;
 
-    this.userService.getUsers().subscribe(users => {
-      const user = users.find(u => u.username === username && u.password === password);
-
-      if (user) {
-        this.authService.login(user);
+    this.apollo.mutate({
+      mutation: LOGIN_MUTATION,
+      variables: { username, password }
+    }).subscribe({
+      next: ({ data }: any) => {
+        localStorage.setItem('token', data.login.token);
+        this.authService.login(data.login.user);
         this.toastService.success('Logged In');
         this.router.navigate(['/portal/dashboard']);
-      } else {
-        this.errorMessage = 'Invalid username or password';
+        this.loading.set(false);
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        this.loading.set(false);
       }
-      this.loading.set(false);
-    }, err => {
-      this.errorMessage = 'Server error';
-      this.loading.set(false);
     });
   }
 

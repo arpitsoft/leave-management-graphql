@@ -1,0 +1,54 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold">Notifications</h2>
+
+    <button mat-raised-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      Create Notification
+    </button>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let n of notifications().getAllNotifications">
+
+      <mat-card class="shadow-sm position-relative px-3 py-3">
+        <mat-card-title class="fw-bold">{{ n?.name }}</mat-card-title>
+
+        <mat-card-content>
+          <p class="text-muted">{{ n?.description }}</p>
+        </mat-card-content>
+
+        <mat-card-actions class="d-flex justify-content-between mt-2">
+
+          <button mat-icon-button color="primary"
+                  (click)="openEditDialog(n)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn"
+                  (click)="delete(n?.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+  </div>
+
+    <div class="pagination d-flex justify-content-between align-items-center mt-4">
+    <!-- Previous Button -->
+    <button mat-raised-button color="primary" (click)="loadPreviousPage()" [disabled]="skip <= 0">
+      <mat-icon>navigate_before</mat-icon> Previous
+    </button>
+
+    <!-- Page Info -->
+    <span>Page {{ (skip / limit) + 1 }} of {{ totalPages() }}</span>
+
+    <!-- Next Button -->
+    <button mat-raised-button color="primary" (click)="loadNextPage()" [disabled]="skip + limit >= totalNotifications()">
+      Next <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>

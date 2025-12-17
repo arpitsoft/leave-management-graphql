@@ -1,7 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterModule } from "@angular/router";
+import { Component, inject } from '@angular/core';
+import { RouterModule } from "@angular/router";
 import { AuthService } from '../../core/services/auth.service';
-import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,12 +9,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
+
 export class SidebarComponent {
   private userService = inject(AuthService)
   userRole = this.userService.userRole;
+  sidebarOpen = false;
 
-
-  constructor() { }
   menus = [
     {
       lable: 'Dashboard', role: ['HOD', 'STAFF'], route: '/dashboard',
@@ -27,8 +26,17 @@ export class SidebarComponent {
       lable: 'Leave Management', role: ['HOD'], route: '/hod/leave-approvals',
     },
     {
+      lable: 'Notification', role: ['HOD'], route: '/portal/notification',
+    },
+    {
       lable: 'Leave Management', role: ['STAFF'], route: 'staff/list',
     }
   ]
+
+
+
+toggleSidebar() {
+  this.sidebarOpen = !this.sidebarOpen;
+}
 
 }
